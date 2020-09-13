@@ -4,6 +4,7 @@ import businessLogic.FullName;
 import businessLogic.Ticket;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -118,6 +119,8 @@ public class Frame extends JFrame  {
         confirmButton.setSize(200, 50);
         confirmButton.setLocation(150, 550);
 
+        nameTextField.setInputVerifier(new NameVerifier(confirmButton));
+
         add(nameLabel);
         add(nameTextField);
 
@@ -198,6 +201,30 @@ public class Frame extends JFrame  {
             yearTextField.setText("");
             timeComboBox.setSelectedIndex(0);
             doctorsList.clearSelection();
+        }
+    }
+
+    public class NameVerifier extends InputVerifier {
+
+        private JButton confirmButton;
+
+        public NameVerifier(JButton confirmButton) {
+            this.confirmButton = confirmButton;
+        }
+
+        @Override
+        public boolean verify(JComponent input) {
+            JTextField nameTextField = (JTextField) input;
+            String name = nameTextField.getText();
+            boolean isCorrect = name.matches("([A-Z][a-z]+ )([A-Z][a-z]+ )([A-Z][a-z]+)");
+            confirmButton.setEnabled(isCorrect);
+            if (!isCorrect) {
+                nameTextField.setBackground(Color.RED);
+            }
+            else {
+                nameTextField.setBackground(Color.WHITE);
+            }
+            return isCorrect;
         }
     }
 }
