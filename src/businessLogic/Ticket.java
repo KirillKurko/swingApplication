@@ -9,7 +9,7 @@ public class Ticket implements Serializable {
 
     private FullName fullName;
     private String visitingReason;
-    private ArrayList<Doctor> doctors;
+    private ArrayList<String> doctors;
     private Calendar visitingDate;
 
     public Ticket() {
@@ -19,7 +19,7 @@ public class Ticket implements Serializable {
         visitingDate = new GregorianCalendar();
     }
 
-    public Ticket(FullName fullName, String visitingReason, ArrayList<Doctor> doctors, GregorianCalendar visitingDate) {
+    public Ticket(FullName fullName, String visitingReason, ArrayList<String> doctors, GregorianCalendar visitingDate) {
         this.fullName = fullName;
         this.visitingReason = visitingReason;
         this.doctors = doctors;
@@ -41,7 +41,7 @@ public class Ticket implements Serializable {
         return visitingReason;
     }
 
-    public ArrayList<Doctor> getDoctors() {
+    public ArrayList<String> getDoctors() {
         return doctors;
     }
 
@@ -57,7 +57,7 @@ public class Ticket implements Serializable {
         this.visitingReason = visitingReason;
     }
 
-    public void setDoctors(ArrayList<Doctor> doctors) {
+    public void setDoctors(ArrayList<String> doctors) {
         this.doctors = doctors;
     }
 
@@ -69,9 +69,10 @@ public class Ticket implements Serializable {
     public String toString() {
         String result =  "Name: " + fullName + "\nVisiting reason: " + visitingReason + "\nDoctors: ";
         StringBuilder doctorsString = new StringBuilder();
-        for (Doctor doctor: doctors) {
-            doctorsString.append(doctor.getType()).append(", ");
+        for (String doctor: doctors) {
+            doctorsString.append(doctor).append(", ");
         }
+        doctorsString.deleteCharAt(doctorsString.length() - 1);
         doctorsString.deleteCharAt(doctorsString.length() - 1);
         result += doctorsString.toString();
         result += "\nVisiting date: " + visitingDate.getTime();

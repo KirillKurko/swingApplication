@@ -3,11 +3,14 @@ package design;
 import businessLogic.Doctor;
 import businessLogic.FullName;
 import businessLogic.Ticket;
-import javafx.scene.control.ComboBox;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Frame extends JFrame  {
 
@@ -141,16 +144,19 @@ public class Frame extends JFrame  {
     }
 
     public class ButtonActionListener implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             Ticket ticket = createTicket();
-            System.out.println(ticket.getFullName());
+            System.out.println(ticket);
         }
 
         private Ticket createTicket() {
             Ticket ticket = new Ticket();
             ticket.setFullName(createFullName());
+            ticket.setVisitingReason(visitingReasonTextArea.getText());
+            ticket.setDoctors(new ArrayList<>(doctorsList.getSelectedValuesList()));
+            ticket.setVisitingDate(createVisitingDate());
             return ticket;
         }
 
@@ -158,6 +164,17 @@ public class Frame extends JFrame  {
             String fullNameStringRepresentation = nameTextField.getText();
             String[] fullNameParts = fullNameStringRepresentation.split(" ");
             return new FullName(fullNameParts[0], fullNameParts[1], fullNameParts[2]);
+        }
+
+        private Calendar createVisitingDate() {
+            Calendar visitingDate = new GregorianCalendar();
+            visitingDate.set(Calendar.DAY_OF_MONTH, Integer.parseInt(monthTextField.getText()));
+            visitingDate.set(Calendar.MONTH, Integer.parseInt(monthTextField.getText()) - 1);
+            visitingDate.set(Calendar.YEAR, Integer.parseInt(yearTextField.getText()));
+            visitingDate.set(Calendar.HOUR_OF_DAY, timeComboBox.getSelectedIndex() + 10);
+            visitingDate.set(Calendar.MINUTE, 0);
+            visitingDate.set(Calendar.SECOND, 0);
+            return visitingDate;
         }
     }
 }
