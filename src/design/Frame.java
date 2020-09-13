@@ -182,7 +182,7 @@ public class Frame extends JFrame  {
         private void saveTicket(Ticket ticket)  {
             try {
                 Writer writer = new FileWriter("tickets.txt", true);
-                writer.append("\n\n" + ticket.toString());
+                writer.write("\n\n" + ticket.toString());
                 writer.close();
             }
             catch (IOException exception) {
