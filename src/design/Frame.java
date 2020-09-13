@@ -6,6 +6,7 @@ import businessLogic.Ticket;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -148,7 +149,7 @@ public class Frame extends JFrame  {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             Ticket ticket = createTicket();
-            System.out.println(ticket);
+            saveTicket(ticket);
         }
 
         private Ticket createTicket() {
@@ -175,6 +176,18 @@ public class Frame extends JFrame  {
             visitingDate.set(Calendar.MINUTE, 0);
             visitingDate.set(Calendar.SECOND, 0);
             return visitingDate;
+        }
+
+        private void saveTicket(Ticket ticket)  {
+            try {
+                Writer writer = new FileWriter("tickets.txt");
+                writer.write(ticket.toString());
+                writer.write("\n");
+                writer.close();
+            }
+            catch (IOException exception) {
+                System.err.println(exception.getMessage());
+            }
         }
     }
 }
