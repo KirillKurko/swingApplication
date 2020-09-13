@@ -1,6 +1,5 @@
 package design;
 
-import businessLogic.Doctor;
 import businessLogic.FullName;
 import businessLogic.Ticket;
 
@@ -10,9 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class Frame extends JFrame  {
+
+    private final String[] doctors = {"General doctor", "Neurologist", "Ophthalmologist", "Pediatrician", "Doctor therapist", "Doctor surgeon"};
 
     private JLabel nameLabel;
     private JTextField nameTextField;
@@ -38,6 +38,7 @@ public class Frame extends JFrame  {
     private DefaultListModel<String> doctorsListModel;
 
     private JButton confirmButton;
+
 
     Frame() {
         super("Order ticket");
@@ -103,10 +104,9 @@ public class Frame extends JFrame  {
         doctorsLabel.setSize(200, 25);
         doctorsLabel.setLocation(100, 375);
 
-        Doctor[] doctors = Doctor.values();
         doctorsListModel = new DefaultListModel<>();
         for (int i = 0; i < doctors.length; ++i) {
-            doctorsListModel.add(i, doctors[i].getType());
+            doctorsListModel.add(i, doctors[i]);
         }
         doctorsList = new JList<>(doctorsListModel);
         doctorsList.setSize(240, 125);
