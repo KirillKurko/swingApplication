@@ -1,10 +1,11 @@
 package businessLogic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Ticket {
+public class Ticket implements Serializable {
 
     private FullName fullName;
     private String visitingReason;

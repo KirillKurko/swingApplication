@@ -1,6 +1,8 @@
 package businessLogic;
 
-public enum Doctor {
+import java.io.Serializable;
+
+public enum Doctor implements Serializable {
     GENERAL_DOCTOR("General doctor"),
     NEUROLOGIST("Neurologist"),
     OPHTHALMOLOGIST("Ophthalmologist"),
