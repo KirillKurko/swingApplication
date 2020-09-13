@@ -150,6 +150,7 @@ public class Frame extends JFrame  {
         public void actionPerformed(ActionEvent actionEvent) {
             Ticket ticket = createTicket();
             saveTicket(ticket);
+            reset();
         }
 
         private Ticket createTicket() {
@@ -188,6 +189,16 @@ public class Frame extends JFrame  {
             catch (IOException exception) {
                 System.err.println(exception.getMessage());
             }
+        }
+
+        private void reset() {
+            nameTextField.setText("");
+            visitingReasonTextArea.setText("");
+            dayTextField.setText("");
+            monthTextField.setText("");
+            yearTextField.setText("");
+            timeComboBox.setSelectedIndex(0);
+            doctorsList.clearSelection();
         }
     }
 }
