@@ -1,13 +1,14 @@
 package application.verifiers.checkers;
 
-import application.verifiers.checkers.Checker;
-
 import java.util.Calendar;
 
 public class YearChecker extends Checker {
 
     @Override
-    boolean check(String value) {
+    public boolean check(String value) {
+        if (value.length() == 0) {
+            return false;
+        }
         for (int i = 0; i < value.length(); ++i) {
             if (!Character.isDigit(value.charAt(i))) {
                 return false;

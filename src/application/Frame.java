@@ -1,13 +1,13 @@
 package application;
 
-import application.verifiers.NameVerifier;
+import application.verifiers.Verifier;
+import application.verifiers.checkers.*;
 import pojo.FullName;
 import pojo.Ticket;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -120,7 +120,11 @@ public class Frame extends JFrame  {
         confirmButton.setSize(200, 50);
         confirmButton.setLocation(150, 550);
 
-        nameTextField.setInputVerifier(new NameVerifier(confirmButton));
+        nameTextField.setInputVerifier(new Verifier(confirmButton, new NameChecker()));
+        dayTextField.setInputVerifier(new Verifier(confirmButton, new DayChecker()));
+        monthTextField.setInputVerifier(new Verifier(confirmButton, new MonthChecker()));
+        yearTextField.setInputVerifier(new Verifier(confirmButton, new YearChecker()));
+        doctorsList.setSelectedIndex(0);
 
         add(nameLabel);
         add(nameTextField);
@@ -152,9 +156,27 @@ public class Frame extends JFrame  {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            Ticket ticket = createTicket();
-            saveTicket(ticket);
-            reset();
+            if (checkFields()) {
+                Ticket ticket = createTicket();
+                saveTicket(ticket);
+                reset();
+            }
+        }
+
+        private boolean checkFields() {
+            boolean dayIsCorrect = !dayTextField.getText().equals("");
+            boolean monthIsCorrect = !monthTextField.getText().equals("");
+            boolean yearIsCorrect = !yearTextField.getText().equals("");
+            if (!dayIsCorrect) {
+                dayTextField.setBackground(Color.RED);
+            }
+            else if (!monthIsCorrect) {
+                monthTextField.setBackground(Color.RED);
+            }
+            else if (!yearIsCorrect) {
+                yearTextField.setBackground(Color.RED);
+            }
+            return dayIsCorrect && monthIsCorrect && yearIsCorrect;
         }
 
         private Ticket createTicket() {

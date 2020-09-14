@@ -1,11 +1,12 @@
 package application.verifiers.checkers;
 
-import application.verifiers.checkers.Checker;
-
 public class NameChecker extends Checker {
 
     @Override
-    boolean check(String value) {
+    public boolean check(String value) {
+        if (value.length() == 0) {
+            return false;
+        }
         return value.matches("([A-Z][a-z]+ )([A-Z][a-z]+ )([A-Z][a-z]+)");
     }
 }
