@@ -1,4 +1,4 @@
-package businessLogic;
+package pojo;
 
 import java.io.Serializable;
 import java.util.ArrayList;

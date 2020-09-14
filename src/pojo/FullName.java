@@ -1,4 +1,4 @@
-package businessLogic;
+package pojo;
 
 public class FullName {
 
