@@ -160,6 +160,7 @@ public class Frame extends JFrame  {
                 Ticket ticket = createTicket();
                 saveTicket(ticket);
                 reset();
+                nameTextField.requestFocus();
             }
         }
 
