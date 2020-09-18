@@ -42,7 +42,6 @@ public class Frame extends JFrame  {
 
     private JButton confirmButton;
 
-
     Frame() {
         super("Order ticket");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
